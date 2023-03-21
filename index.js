@@ -5,6 +5,7 @@ const colors = require("colors");
 
 // local imports
 const connectDB = require("./config/db");
+const userRouter = require("./routes/userRoute");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,6 +20,7 @@ connectDB();
 
 // routes
 app.get("/", (req, res) => res.send("API working"));
+app.use("/api/v1/user", userRouter);
 
 // listener
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`.green));
