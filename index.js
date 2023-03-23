@@ -7,6 +7,8 @@ const colors = require("colors");
 const connectDB = require("./config/db");
 const userRouter = require("./routes/userRoute");
 const postRouter = require("./routes/postRoute");
+const issueRouter = require("./routes/issueRoute");
+const newsRouter = require("./routes/newsRoute");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,6 +25,8 @@ connectDB();
 app.get("/", (req, res) => res.send("API working"));
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/post", postRouter);
+app.use("/api/v1/issue", issueRouter);
+app.use("/api/v1/news", newsRouter);
 
 // listener
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`.green));

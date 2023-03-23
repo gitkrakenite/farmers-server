@@ -117,6 +117,18 @@ const getMe = async (req, res) => {
   res.status(200).json(req.user);
 };
 
+// DESC     get all users
+// METHOD   GET /api/v1/user
+// ACCESS   private to me
+const getAllUsers = async (req, res) => {
+  try {
+    const user = await User.find().sort({ $natural: -1 });
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(500).send("Could not fetch");
+  }
+};
+
 // Generate JWT
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.SECRET_KEY, {
@@ -129,4 +141,5 @@ module.exports = {
   loginUser,
   getUser,
   getMe,
+  getAllUsers,
 };
