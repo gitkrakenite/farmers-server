@@ -5,14 +5,15 @@ const User = require("../models/userModel");
 // http://localhost:8000/api/v1/info
 // private
 const createInfo = async (req, res, next) => {
-  const { title, category, information } = req.body;
-  if (!title || !information || !category) {
+  const { title, category, details } = req.body;
+
+  if (!title || !details || !category) {
     res.status(404).json({ message: "fields missing" });
     return;
   }
   try {
     const info = await Information.create({
-      information,
+      information: details,
       category,
       title,
       username: req.user.name,
@@ -43,6 +44,7 @@ const fetchInfo = async (req, res, next) => {
 const deleteInfo = async (req, res, next) => {
   // check if posts exist
   const info = await Information.findById(req.params.id);
+  // console.log(req.params.id);
 
   if (!info) {
     res.status(400).json({ message: "information not found" });

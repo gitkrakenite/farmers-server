@@ -10,6 +10,7 @@ const postRouter = require("./routes/postRoute");
 const issueRouter = require("./routes/issueRoute");
 const newsRouter = require("./routes/newsRoute");
 const infoRouter = require("./routes/infoRoute");
+const productRouter = require("./routes/productRoute");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -29,6 +30,7 @@ app.use("/api/v1/post", postRouter);
 app.use("/api/v1/issue", issueRouter);
 app.use("/api/v1/news", newsRouter);
 app.use("/api/v1/info", infoRouter);
+app.use("/api/v1/product", productRouter);
 
 // listener
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`.green));
