@@ -72,37 +72,42 @@ const fetchProductOnCategory = async (req, res) => {
 };
 
 // @delete  DELETE
-// http://localhost:5000/api/v1/posts/delete/:id
-// private
-// const deletePost = async (req, res, next) => {
-//   // check if posts exist
-//   const post = await Post.findById(req.params.id);
+//localhost:5000/api/v1/product/delete/:id
+// http: private;
+const deleteProduct = async (req, res, next) => {
+  // check if product exist
+  const product = await Product.findById(req.params.id);
 
-//   if (!post) {
-//     res.status(400).json({ message: "post not found" });
-//     return;
-//   }
+  if (!product) {
+    res.status(400).json({ message: "product not found" });
+    return;
+  }
 
-//   const user = await User.findById(req.user.id); //find the logged in user from db
+  const user = await User.findById(req.user.id); //find the logged in user from db
 
-//   // check for user
-//   if (!user) {
-//     res.status(401).send("user not found");
-//     return;
-//   }
+  // check for user
+  if (!user) {
+    res.status(401).send("user not found");
+    return;
+  }
 
-//   // compare the user who created the goal with the logged in user
-//   if (post?.username?.toString() !== user.name) {
-//     res.status(401).send("Not Authorized");
-//     return;
-//   }
+  // compare the user who created the goal with the logged in user
+  if (product?.username?.toString() !== user.name) {
+    res.status(401).send("Not Authorized");
+    return;
+  }
 
-//   try {
-//     await Post.findByIdAndDelete(req.params.id);
-//     res.status(200).json({ id: req.params.id });
-//   } catch (error) {
-//     res.status(400).json({ message: "Could not delete post" });
-//   }
-// };
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json({ id: req.params.id });
+  } catch (error) {
+    res.status(400).json({ message: "Could not delete product" });
+  }
+};
 
-module.exports = { createProduct, fetchProducts, fetchProductOnCategory };
+module.exports = {
+  createProduct,
+  fetchProducts,
+  fetchProductOnCategory,
+  deleteProduct,
+};
